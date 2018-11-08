@@ -1,0 +1,96 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: main()
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main()) [1] vectorization.cc(21,11)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at vectorization.cc(28,3)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=8
+LOOP END
+
+LOOP BEGIN at vectorization.cc(28,3)
+<Remainder loop for vectorization>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=2
+LOOP END
+
+LOOP BEGIN at vectorization.cc(29,3)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=8
+LOOP END
+
+LOOP BEGIN at vectorization.cc(29,3)
+<Remainder loop for vectorization>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=2
+LOOP END
+
+LOOP BEGIN at vectorization.cc(32,3)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=16
+LOOP END
+
+LOOP BEGIN at vectorization.cc(32,3)
+<Remainder loop for vectorization>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=4
+LOOP END
+
+LOOP BEGIN at vectorization.cc(36,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #25018: Total number of lines prefetched=4
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+vectorization.cc(21,11):remark #34051: REGISTER ALLOCATION : [main] vectorization.cc:21
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   19[ rax rdx rcx rsi rdi r12 zmm0-zmm10 k1-k2]
+        
+    Routine temporaries
+        Total         :      64
+            Global    :      36
+            Local     :      28
+        Regenerable   :      18
+        Spilled       :       1
+        
+    Routine stack
+        Variables     :   160004 bytes*
+            Reads     :      16 [1.40e+05 ~ 12.4%]
+            Writes    :      19 [1.70e+05 ~ 15.0%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================

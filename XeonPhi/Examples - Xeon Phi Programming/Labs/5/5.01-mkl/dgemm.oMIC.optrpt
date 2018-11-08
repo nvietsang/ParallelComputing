@@ -1,0 +1,83 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main(int, char **)) [1] dgemm.cc(7,34)
+  -> INLINE: (11,9) atoi(const char *)
+     {{ Inlining of routines from system headers is omitted. Use -qopt-report=3 to view full report. }}
+
+
+    Report from: OpenMP optimizations [openmp]
+
+dgemm.cc(39:1-39:1):OMP:main:  OpenMP DEFINED LOOP WAS PARALLELIZED
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at dgemm.cc(48,3)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+LOOP END
+
+LOOP BEGIN at dgemm.cc(39,1)
+<Peeled loop for vectorization>
+   remark #15335: peel loop was not vectorized: vectorization possible but seems inefficient. Use vector always directive or -vec-threshold0 to override 
+LOOP END
+
+LOOP BEGIN at dgemm.cc(39,1)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=24
+LOOP END
+
+LOOP BEGIN at dgemm.cc(39,1)
+<Remainder loop for vectorization>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+dgemm.cc(7,34):remark #34051: REGISTER ALLOCATION : [main] dgemm.cc:7
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   51[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm31 k1-k5]
+        
+    Routine temporaries
+        Total         :     489
+            Global    :      92
+            Local     :     397
+        Regenerable   :     122
+        Spilled       :      16
+        
+    Routine stack
+        Variables     :      96 bytes*
+            Reads     :      25 [5.68e+01 ~ 2.9%]
+            Writes    :      19 [3.38e+01 ~ 1.7%]
+        Spills        :     336 bytes*
+            Reads     :      39 [1.15e+02 ~ 5.9%]
+            Writes    :      28 [3.87e+01 ~ 2.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================

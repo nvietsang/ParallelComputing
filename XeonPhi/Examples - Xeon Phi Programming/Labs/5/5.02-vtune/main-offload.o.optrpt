@@ -1,0 +1,297 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main(int, char **)) [1] main-offload.cc(36,33)
+  -> INLINE: (49,5) InitializeMatrix(int, double *)
+
+
+    Report from: OpenMP optimizations [openmp]
+
+main-offload.cc(68:1-68:1):OMP:main:  OpenMP DEFINED LOOP WAS PARALLELIZED
+
+    Report from: Offload optimizations [offload]
+
+OFFLOAD:main(37,1):  Offload to target MIC <expr>
+ Data sent from host to target
+ Data received by host from target
+
+
+    Report from: Code generation optimizations [cg]
+
+main-offload.cc(36,33):remark #34051: REGISTER ALLOCATION : [main] main-offload.cc:36
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :    7[ rax rdx rcx rsi rdi r8-r9]
+        
+    Routine temporaries
+        Total         :      58
+            Global    :       4
+            Local     :      54
+        Regenerable   :      27
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       4 bytes*
+            Reads     :       2 [0.00e+00 ~ 0.0%]
+            Writes    :       2 [0.00e+00 ~ 0.0%]
+        Spills        :      40 bytes*
+            Reads     :      10 [5.00e+00 ~ 18.5%]
+            Writes    :      10 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: InitializeMatrix(int, double *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (InitializeMatrix(int, double *)) [2] main-offload.cc(23,76)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main-offload.cc(25,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at main-offload.cc(27,5)
+   <Peeled loop for vectorization>
+   LOOP END
+
+   LOOP BEGIN at main-offload.cc(27,5)
+      remark #15300: LOOP WAS VECTORIZED
+      remark #25456: Number of Array Refs Scalar Replaced In Loop: 4
+   LOOP END
+
+   LOOP BEGIN at main-offload.cc(27,5)
+   <Remainder loop for vectorization>
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+      remark #25456: Number of Array Refs Scalar Replaced In Loop: 1
+   LOOP END
+
+   LOOP BEGIN at main-offload.cc(27,5)
+   <Remainder loop for vectorization>
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main-offload.cc(23,76):remark #34051: REGISTER ALLOCATION : [_Z16InitializeMatrixiPd] main-offload.cc:23
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   39[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm15]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   26[ rax rdx rcx rbx rsi rdi r8-r12 r14-r15 zmm0-zmm12]
+        
+    Routine temporaries
+        Total         :     113
+            Global    :      37
+            Local     :      76
+        Regenerable   :       7
+        Spilled       :       4
+        
+    Routine stack
+        Variables     :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+        Spills        :      32 bytes*
+            Reads     :       4 [3.60e+00 ~ 0.2%]
+            Writes    :       4 [3.60e+00 ~ 0.2%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+*MIC* Begin optimization report for: main(int, char **)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (main(int, char **)) [1] main-offload.cc(36,33)
+  -> INLINE: (49,5) InitializeMatrix(int, double *)
+
+
+    Report from: OpenMP optimizations [openmp]
+
+main-offload.cc(68:1-68:1):OMP:main:  OpenMP DEFINED LOOP WAS PARALLELIZED
+
+    Report from: Offload optimizations [offload]
+
+OFFLOAD:main(37,1):  Outlined offload region
+ Data received by target from host
+ Data sent from target to host
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main-offload.cc(25,3) inlined into main-offload.cc(49,5)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+   remark #25018: Total number of lines prefetched=2
+
+   LOOP BEGIN at main-offload.cc(27,5) inlined into main-offload.cc(49,5)
+      remark #15300: LOOP WAS VECTORIZED
+      remark #25456: Number of Array Refs Scalar Replaced In Loop: 7
+      remark #25018: Total number of lines prefetched=16
+   LOOP END
+LOOP END
+
+LOOP BEGIN at main-offload.cc(53,5)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=2
+LOOP END
+
+LOOP BEGIN at main-offload.cc(55,27)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=2
+LOOP END
+
+LOOP BEGIN at main-offload.cc(66,5)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+LOOP END
+
+LOOP BEGIN at main-offload.cc(68,1)
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization. First dependence is shown below. Use level 5 report for details
+   remark #25018: Total number of lines prefetched=2
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main-offload.cc(36,33):remark #34051: REGISTER ALLOCATION : [main] main-offload.cc:36
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   53[ rax rdx rcx rbx rsi rdi r8-r15 zmm0-zmm31 k1-k7]
+        
+    Routine temporaries
+        Total         :     476
+            Global    :      94
+            Local     :     382
+        Regenerable   :     130
+        Spilled       :       9
+        
+    Routine stack
+        Variables     :      76 bytes*
+            Reads     :      15 [1.39e+01 ~ 0.0%]
+            Writes    :      14 [5.09e+01 ~ 0.0%]
+        Spills        :     224 bytes*
+            Reads     :      34 [1.58e+02 ~ 0.0%]
+            Writes    :      31 [1.24e+02 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+*MIC* Begin optimization report for: InitializeMatrix(int, double *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (InitializeMatrix(int, double *)) [13] main-offload.cc(23,76)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at main-offload.cc(25,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+   remark #25018: Total number of lines prefetched=4
+
+   LOOP BEGIN at main-offload.cc(27,5)
+   <Peeled loop for vectorization>
+      remark #15301: PEEL LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at main-offload.cc(27,5)
+      remark #15300: LOOP WAS VECTORIZED
+      remark #25456: Number of Array Refs Scalar Replaced In Loop: 4
+      remark #25018: Total number of lines prefetched=8
+   LOOP END
+
+   LOOP BEGIN at main-offload.cc(27,5)
+   <Remainder loop for vectorization>
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+main-offload.cc(23,76):remark #34051: REGISTER ALLOCATION : [_Z16InitializeMatrixiPd] main-offload.cc:23
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   30[ rax rdx rcx rbx rsi rdi r8-r12 r14-r15 zmm0-zmm13 k1-k3]
+        
+    Routine temporaries
+        Total         :      98
+            Global    :      43
+            Local     :      55
+        Regenerable   :       7
+        Spilled       :       4
+        
+    Routine stack
+        Variables     :      16 bytes*
+            Reads     :       6 [1.35e+01 ~ 0.8%]
+            Writes    :       6 [1.35e+01 ~ 0.8%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================

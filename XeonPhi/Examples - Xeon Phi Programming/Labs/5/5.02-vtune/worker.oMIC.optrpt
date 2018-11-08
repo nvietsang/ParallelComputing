@@ -1,0 +1,176 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINING OPTION VALUES:
+  -inline-factor: 100
+  -inline-min-size: 30
+  -inline-max-size: 230
+  -inline-max-total-size: 2000
+  -inline-max-per-routine: 10000
+  -inline-max-per-compile: 500000
+
+
+Begin optimization report for: RelativeNormOfDifference(int, const double *, const double *)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (RelativeNormOfDifference(int, const double *, const double *)) [1] worker.cc(16,82)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at worker.cc(22,3)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=4
+LOOP END
+
+LOOP BEGIN at worker.cc(22,3)
+<Remainder loop for vectorization>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+worker.cc(16,82):remark #34051: REGISTER ALLOCATION : [_Z24RelativeNormOfDifferenceiPKdS0_] worker.cc:16
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   44[ rax rdx rcx rsi rdi r8-r9 zmm0-zmm31 k1-k5]
+        
+    Routine temporaries
+        Total         :     136
+            Global    :      27
+            Local     :     109
+        Regenerable   :      13
+        Spilled       :       0
+        
+    Routine stack
+        Variables     :       8 bytes*
+            Reads     :       1 [9.00e-01 ~ 0.3%]
+            Writes    :       1 [9.00e-01 ~ 0.3%]
+        Spills        :       0 bytes*
+            Reads     :       0 [0.00e+00 ~ 0.0%]
+            Writes    :       0 [0.00e+00 ~ 0.0%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
+
+Begin optimization report for: IterativeSolver(int, const double *, const double *, double *, double)
+
+    Report from: Interprocedural optimizations [ipo]
+
+INLINE REPORT: (IterativeSolver(int, const double *, const double *, double *, double)) [2] worker.cc(30,105)
+  -> INLINE: (55,16) RelativeNormOfDifference(int, const double *, const double *)
+
+
+    Report from: Loop nest, Vector & Auto-parallelization optimizations [loop, vec, par]
+
+
+LOOP BEGIN at worker.cc(35,7)
+   remark #15300: LOOP WAS VECTORIZED
+   remark #25018: Total number of lines prefetched=8
+LOOP END
+
+LOOP BEGIN at worker.cc(35,7)
+<Remainder loop for vectorization>
+   remark #15301: REMAINDER LOOP WAS VECTORIZED
+LOOP END
+
+LOOP BEGIN at worker.cc(49,5)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at worker.cc(40,5)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+      remark #25018: Total number of lines prefetched=6
+
+      LOOP BEGIN at worker.cc(43,7)
+         remark #15300: LOOP WAS VECTORIZED
+         remark #25018: Total number of lines prefetched=16
+      LOOP END
+
+      LOOP BEGIN at worker.cc(43,7)
+      <Remainder loop for vectorization>
+         remark #15301: REMAINDER LOOP WAS VECTORIZED
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at worker.cc(49,5)
+      remark #15300: LOOP WAS VECTORIZED
+      remark #25018: Total number of lines prefetched=8
+   LOOP END
+
+   LOOP BEGIN at worker.cc(49,5)
+   <Remainder loop for vectorization>
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+   LOOP END
+
+   LOOP BEGIN at worker.cc(50,5)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+      remark #25018: Total number of lines prefetched=2
+
+      LOOP BEGIN at worker.cc(52,7)
+         remark #15300: LOOP WAS VECTORIZED
+         remark #25018: Total number of lines prefetched=16
+      LOOP END
+
+      LOOP BEGIN at worker.cc(52,7)
+      <Remainder loop for vectorization>
+         remark #15301: REMAINDER LOOP WAS VECTORIZED
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at worker.cc(22,3) inlined into worker.cc(55,16)
+      remark #15300: LOOP WAS VECTORIZED
+      remark #25018: Total number of lines prefetched=4
+   LOOP END
+
+   LOOP BEGIN at worker.cc(22,3) inlined into worker.cc(55,16)
+   <Remainder loop for vectorization>
+      remark #15301: REMAINDER LOOP WAS VECTORIZED
+   LOOP END
+LOOP END
+
+    Report from: Code generation optimizations [cg]
+
+worker.cc(30,105):remark #34051: REGISTER ALLOCATION : [_Z15IterativeSolveriPKdS0_Pdd] worker.cc:30
+
+    Hardware registers
+        Reserved     :    2[ rsp rip]
+        Available    :   63[ rax rdx rcx rbx rbp rsi rdi r8-r15 mm0-mm7 zmm0-zmm31 k0-k7]
+        Callee-save  :    6[ rbx rbp r12-r15]
+        Assigned     :   53[ rax rdx rcx rsi rdi r8-r15 zmm0-zmm31 k0-k7]
+        
+    Routine temporaries
+        Total         :     444
+            Global    :     117
+            Local     :     327
+        Regenerable   :      30
+        Spilled       :      18
+        
+    Routine stack
+        Variables     :      16 bytes*
+            Reads     :       6 [7.16e+01 ~ 0.4%]
+            Writes    :       6 [7.16e+01 ~ 0.4%]
+        Spills        :     112 bytes*
+            Reads     :      31 [3.07e+02 ~ 1.6%]
+            Writes    :      19 [6.13e+01 ~ 0.3%]
+    
+    Notes
+    
+        *Non-overlapping variables and spills may share stack space,
+         so the total stack size might be less than this.
+    
+
+===========================================================================
